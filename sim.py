@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+from numpy import sign
 
 def is_terminal(x, y):
     if (y <= 0 and (x >= 9.0 or x <= 10)):
