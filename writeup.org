@@ -1,0 +1,23 @@
+#+TITLE: Monte Carlo RL 
+
+
+
+* Approach
+
+We used a Monte Carlo random walk across the grid as a brute-force approach to
+determine the optimal policy.  A Monte Carlo approach was chosen because each
+individual step was independent of previous steps. As such, there was no
+guarantee that the algorithm will converge. 
+
+Our initial policy was a uniform distribution describing an equal probability of
+moving in any direction from all locations in the grid. Policies were computed
+for a large number of random walks that were then averaged to estimate the true
+policy, eg. the one that travels from the initial starting point to the goal
+with the least number of steps.
+
+* Algorithm
+
+Each walk started from an intial point, and there were 8 possible actions for
+each step -- a single unit of movement in each cardinal and diagonal direction.
+Penalities were assigned for falling off for each step and falling off the cliff.
+After step on the walk the number of visits to the current grid were updated.
