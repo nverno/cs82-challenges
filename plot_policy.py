@@ -1,5 +1,5 @@
 def arrow_xy(action, prob):
-       ## Position change given action:
+    ## Position change given action:
     if(action == 0): # move right
         a_out = [1.0,0.0]
     elif(action == 1): # move right-up
@@ -31,14 +31,14 @@ def display_policy(policy, num_cells = 10, lims = 10.0):
     ## Find max arrow length 
     cell_width = lims/float(num_cells)
     arrow_length = 0.5 * cell_width
- 
+    
     ## Set up the figure area
     fig = plt.figure(figsize=(8, 8)) # define plot area
     ax = fig.gca() # define axis 
- 
+    
     ## Iterate over the grid and plot
     for x_indx, y_indx, action in product(range(num_cells),range(num_cells),range(8)):
-     ## Find endpoints of the line segment
+        ## Find endpoints of the line segment
         move = arrow_xy(action, policy[x_indx,y_indx,action])
         x0 = x_indx * cell_width + arrow_length
         x1 = x0 + move[0]
@@ -48,7 +48,7 @@ def display_policy(policy, num_cells = 10, lims = 10.0):
     ## now plot 
     # ax.plot([x0,x1],[y0,y1])
     ax.annotate(' ', xytext =(x0,y0), xy = (x1,y1), arrowprops = ({'arrowstyle':'->'}))
- 
+    
     ## Now plot the grid
     ## first the vertical lines
     for indx in range(num_cells-1):
@@ -63,4 +63,4 @@ def display_policy(policy, num_cells = 10, lims = 10.0):
     ax.plot([0.0,lims], [0.0,0.0], color = 'black')
     ax.plot([lims,0.0], [lims,lims], color = 'black')
     ax.plot([lims,lims], [0.0,lims], color = 'black')
- 
+    
