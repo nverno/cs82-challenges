@@ -26,3 +26,4 @@ def update_policy(policy, Q, epsilon):
     return(policy)                
 
 update_policy(initial_policy, Q, 0.1)    
+
