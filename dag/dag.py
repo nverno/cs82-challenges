@@ -3,8 +3,8 @@ import pandas as pd
 from pgmpy.models import BayesianModel
 from pgmpy.factors.discrete import TabularCPD
 
-dat = pd.read_csv("BreakingData.csv")
-# dat.head()
+data = pd.read_csv("BreakingData.csv")
+data.head()
 
 edges = [
     ('Object', 'Collision'), 
@@ -23,6 +23,8 @@ edges = [
     ('Weather_Visibility', 'Weather_Detection'),
     ('Weather_Visibility', 'Visual_Sensor_Detection'),
 
+    ('Weather_Detection', 'Sensor_Detection'),
+
     ('Road_Condition', 'Road_Condition_Detection'),
     ('Road_Condition', 'Collision'),
 
@@ -30,35 +32,6 @@ edges = [
 
     ('Early_Breaking', 'Collision')
 ]
-
+variables = data.columns[1:]
 mod = BayesianModel(edges)
 
-nodes = []
-for i in edges:
-    nodes.append(i[0])
-    nodes.append(i[1])
-
-# Tabular CPDS
-
-for n in ["Road_Condition", "Weather_Visibility", "Light_Dark", "Object"]:
-    mod.add_cpds(TabularCPD(variable=n, variable_card=2, values=[[0, 1]]))
-
-mod.add_cpds(TabularCPD(variable='Road_Condition_Detection',
-                        variable_card=2, values=[[0, 1], [0, 1]],
-                        evidence=['Road_Condition'], evidence_card=[2]))
-mod.add_cpds(TabularCPD(variable='Weather_Detection',
-                        variable_card=2, values=[[0, 1], [0, 1]],
-                        evidence=['Weather_Visibility'], evidence_card=[2]))
-
-mod.add_cpds(TabularCPD(variable='Visual_Sensor_Detection',
-                        variable_card=3, values=[[0, 1],
-                                                 [0, 1],
-                                                 [0, 1]],
-                        evidence=['Weather_Visibility',
-                                  'Light_Dark',
-                                  'Object'],
-                        evidence_card=[2, 2]))
-
-
-    cpd_B, cpd_C, cpd_MO, cpd_W, cpd_M
-    )

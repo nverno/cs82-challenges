@@ -1,7 +1,5 @@
 #+TITLE: Monte Carlo RL 
 
-
-
 * Approach
 
 We used a Monte Carlo random walk across the grid as a brute-force approach to
