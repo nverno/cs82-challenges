@@ -1,5 +1,8 @@
+import numpy as np
 from itertools import permutations as perm
-moves = list(perm([0, 1, -1], 2)) + [[1, 1], [-1, -1]]
+moves = list(map(lambda x: np.array(x, dtype=np.float),
+                 list(perm([0., 1., -1.], 2)) +
+                 [(1., 1.), (-1., -1.)]))
 
 def test_sim(init, moves):
     """
@@ -21,7 +24,9 @@ inits = [[0,0],                                   # start
          [5,2],                                   # middle/above cliff
          [5,5],                                   # middle of grid
          [8,1],                                   # border terminal
-         [9,2]                                    # border terminal
+         [8,1]                                    # border terminal
          ]
+inits = map(lambda x: np.array(x, dtype=np.float), inits)
+
 for i in inits:
     test_sim(i, moves)
